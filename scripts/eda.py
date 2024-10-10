@@ -27,7 +27,7 @@ def generate_relational_tables(*hues, **kwargs) -> defaultdict[str, pd.DataFrame
 
 def generate_distribution_tables(df: pd.DataFrame) -> defaultdict[str, pd.DataFrame]:
     tables = defaultdict()
-    
+
     for x in df.columns:
         table_title = format_title("dist.table", x)
         tables[table_title] = df.describe().T
@@ -93,6 +93,7 @@ def generate_distribution_plots(df: pd.DataFrame, *hues: tuple[str]) -> defaultd
                 plots[plot_name] = sns.displot(data = df, x = x, hue = hue, col = hue, kind = "hist")
             else:
                 plots[plot_name] = sns.displot(data = df, x = x, hue = hue, row = hue, kind = "hist")
+    return plots
 
 def generate_categorical_plots(df: pd.DataFrame, *hues: tuple[str]) -> defaultdict[str, sns.objects.Plot]:
     plots = defaultdict()
