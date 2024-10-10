@@ -26,7 +26,7 @@ ____
 Python - A general purpose programming language, very popular in the data science community for its readability and ease-of-use.
 
 **Libraries**<br>
-Jupyter Notebook – Exploratory analysis tool<br>
+Jupyter Notebook – Data storytelling tool<br>
 Pandas – Data handling & analysis library<br>
 Seaborn – Data visualization library<br>
 Darts – Time Series Forecasting Toolbox<br>
