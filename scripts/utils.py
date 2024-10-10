@@ -1,3 +1,4 @@
+#!/usr/bin/python
 # A set of utility functions that are shared across analyses
 import pandas as pd
 

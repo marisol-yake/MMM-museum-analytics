@@ -1,3 +1,4 @@
+#!/usr/bin/python
 # A streamlined script of our comprehensive exploratory data visualization process
 from typing import Callable
 import pandas as pd
@@ -200,4 +201,4 @@ def main(data_path , export: bool) -> None:
 
 if __name__ == "__main__":
     data_path = ...
-    main(data_path)
+    main(data_path, export = False)
