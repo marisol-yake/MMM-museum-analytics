@@ -25,7 +25,7 @@ ____
 ## Analysis Tools
 Python - A general purpose programming language, very popular in the data science community for its readability and ease-of-use.
 
-**Libraries**
+**Libraries**<br>
 Jupyter Notebook - Exploratory analysis tool<br>
 Pandas – Data handling & analysis library<br>
 Seaborn – Data visualization library<br>
