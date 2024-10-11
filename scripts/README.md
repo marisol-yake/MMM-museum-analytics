@@ -1,7 +1,7 @@
 # CADA Automated Collection Analysis & Forecasting Software
 
 ## Project File Structure
-.
+.<br>
 └── scripts/<br>
     ├── eda.py<br>
     ├── etl.py<br>
