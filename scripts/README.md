@@ -2,7 +2,7 @@
 
 ## Project File Structure
 .
-└── scripts/
+└── scripts/<br>
     ├── eda.py<br>
     ├── etl.py<br>
     ├── models.py<br>
