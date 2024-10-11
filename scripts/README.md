@@ -3,14 +3,14 @@
 ## Project File Structure
 .
 └── scripts/
-    ├── eda.py
-    ├── etl.py
-    ├── models.py
-    ├── null_analysis.py
-    ├── README.md
-    ├── ts_forecasting_pipeline.py
-    ├── ts_statistics.py
-    └── utils.py
+    ├── eda.py<br>
+    ├── etl.py<br>
+    ├── models.py<br>
+    ├── null_analysis.py<br>
+    ├── README.md<br>
+    ├── ts_forecasting_pipeline.py<br>
+    ├── ts_statistics.py<br>
+    └── utils.py<br>
 
 ## File Descriptions
 eda.py --  Exploratory Analysis
