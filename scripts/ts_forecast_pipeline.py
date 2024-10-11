@@ -1,25 +1,27 @@
 #!/usr/bin/python
 # A streamlined script of our generalized time series forecasting process
-import darts
 import pandas as pd
 from sklearn.model_selection import TimeSeriesSplit
+from ts_statistics import timeseries_stats_tests, generate_model_recommendations
 
 def main(data_path):
-    # Analysis expectations formed after exploratory analysis
-    # and client requirement gathering.
-    suspected_stationarity = False
-    suspected_seasonality = True
-    suspected_trend = True
+    # Time Series Statistical Tests
+    # results = timeseries_stats_tests(series)
 
-    # Time Series Statistical Tests 
-    # stationarity?
-    # seasonality?
-    # trend?
+    # Generate model recommendations based on statistical tests
+    # models = generate_model_recommendations(results)
+    
+    # Time Series Data Cross-Validation
+    # tscv = TimeSeriesSplit(n = 5)
 
-    # if seasonality and trend:
-        # ts models that I know about that are good for this.
-    # elif not seasonality and not trend:
-        # ts models that I know about that are good for this.
+    # Generate model metrics from fit (predictions against true data)
+
+    # Select models based on preferred metrics (there is no one-size fits all metric)
+
+    # Check for overfitting and underfitting of models
+
+    # Generate necessary predictions
+    pass
 
 if __name__ == "__main__":
     data_path = ...

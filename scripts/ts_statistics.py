@@ -1,6 +1,5 @@
 #!/usr/bin/python
 from collections import defaultdict
-from darts.models import NaiveDrift, NaiveMovingAverage, ExponentialSmoothing
 from darts.statistics import check_seasonality, stationarity_tests, plot_residuals_analysis
 import pandas as pd
 import numpy as np
@@ -68,38 +67,28 @@ def generate_model_recommendations(ts_test_results: defaultdict, intermittent: b
         Describes external qualitative knowledge about the given data.
     """
     models = defaultdict()
-    baseline_models = {
-        "Naive": NaiveDrift(), 
-        "Moving Average": NaiveMovingAverage(), 
-        "Exponential Smoothing": ExponentialSmoothing()
-        }
+    baseline_models = models.baseline_models
     
     # Intermittent Demand - No Seasonality and Difficult-to-Discern Trend
     if intermittent:
         # intermittent demand forecasting models
-        models = ... # CROSTON, SBA, TSB
+        models = models.id_models # CROSTON, SBA, TSB
         return models
     
-    # Seasonality and Non-Negligible Trend
-    if ts_test_results["Seasonality"] and np.abs(ts_test_results["Trend"][1]) > 0.01:
-        # additive or multiplicative models?
-        # ts models that I know about that are good for this.
-        models = ...
+    # Check for Stationarity
+    if ts_test_results["Stationarity"]:
+        models = models.auto_models
     
-    # Seasonality and Negligible Trend
-    elif ts_test_results["Seasonality"] and np.abs(ts_test_results["Trend"][1]) < 0.01:
-        # ts models that I know about that are good for this.
-        models = ...
-    
-    # No Seasonality, regardless of Trend
-    elif ts_test_results["Seasonality"]:
-        # Check for Stationarity
-        if ts_test_results["Stationarity"]:
-            # Do something
-            models = ...
-        elif not ts_test_results["Stationarity"]:
-            # Do something else
-            models = ...
+    elif not ts_test_results["Stationarity"]:
+        # TODO: additive or multiplicative models?
+
+        # Seasonality and Non-Negligible Trend
+        if ts_test_results["Seasonality"] and np.abs(ts_test_results["Trend"][1]) >= 0.01:
+            models = models.st_models
+        
+        # Seasonality and Negligible Trend
+        elif ts_test_results["Seasonality"] and np.abs(ts_test_results["Trend"][1]) < 0.01:
+            models = models.seasonal_models
     return baseline_models | models
 
 def timeseries_stats_tests(series: pd.Series, model: str, p_value: float = 0.05) -> defaultdict:  
