@@ -14,6 +14,7 @@ def gen_ts_features(df, date_column):
     df["week_of_year"] = df[date_column].dt.isocalendar().week
     df["month_of_year"] = df[date_column].dt.month_name()
     df["year"] = df[date_column].dt.isocalendar().year
+
     return df
 
 ## Statistical Tests
@@ -32,6 +33,7 @@ def calc_trend_strength(series: pd.Series, order = 1) -> tuple[str, float]:
         trend_strength = "Strong-Negative"
     elif slope > -0.5 and slope < 0:
         trend_strength = "Weak-Negative"
+
     return (trend_strength, slope)
 
 def is_stationary(series, p_value: float = 0.05) -> bool:
@@ -43,6 +45,7 @@ def is_stationary(series, p_value: float = 0.05) -> bool:
         print("The time series is stationary, p-value of {}".format(p_value))
     else:
         print("The time series is non-stationary.")
+
     return result
 
 def has_seasonality(series, p_value: float = 0.05) -> tuple[bool, int]:
@@ -53,6 +56,7 @@ def has_seasonality(series, p_value: float = 0.05) -> tuple[bool, int]:
         print("P-value: {}".format(p_value))
     else:
         print("The time series does not have seasonality.")
+
     return result
 
 def generate_model_recommendations(ts_test_results: defaultdict, intermittent: bool = False) -> defaultdict[str, darts.Model]:
@@ -73,15 +77,12 @@ def generate_model_recommendations(ts_test_results: defaultdict, intermittent: b
     if intermittent:
         # intermittent demand forecasting models
         models = models.id_models # CROSTON, SBA, TSB
-        return models
     
     # Check for Stationarity
-    if ts_test_results["Stationarity"]:
+    if ts_test_results["Stationarity"] and not intermittent:
         models = models.auto_models
     
-    elif not ts_test_results["Stationarity"]:
-        # TODO: additive or multiplicative models?
-
+    elif not ts_test_results["Stationarity"] not intermittent:
         # Seasonality and Non-Negligible Trend
         if ts_test_results["Seasonality"] and np.abs(ts_test_results["Trend"][1]) >= 0.01:
             models = models.st_models
@@ -89,6 +90,7 @@ def generate_model_recommendations(ts_test_results: defaultdict, intermittent: b
         # Seasonality and Negligible Trend
         elif ts_test_results["Seasonality"] and np.abs(ts_test_results["Trend"][1]) < 0.01:
             models = models.seasonal_models
+
     return baseline_models | models
 
 def timeseries_stats_tests(series: pd.Series, model: str, p_value: float = 0.05) -> defaultdict:  
