@@ -1,0 +1,21 @@
+
+site_name: MMM Collections and Data Analysis (CADA)
+
+nav:
+  - index.md
+  - reference.md
+  - explanation.md
+
+theme: 
+  name: readthedocs
+
+logo: CADA\docs\img\MMM_Logo_Bk.svg
+
+plugins:
+  - search
+  - autorefs
+  - mkdocstrings:
+      handlers:
+        python:
+          options:
+            docstring_style: numpy

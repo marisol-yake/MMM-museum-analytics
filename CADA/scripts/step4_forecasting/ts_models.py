@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # A streamlined script of our time series forecasting process
 # For time series data that can be characterized by having seasonality and trend.
-from darts.models import Croston, NaiveDrift, NaiveMovingAverage, ExponentialSmoothing
+from darts.models.forecasting import Croston, NaiveDrift, NaiveMovingAverage, ExponentialSmoothing
 
 baseline_models = {
     "Naive": NaiveDrift(),
@@ -16,7 +16,7 @@ st_models = {}
 # Time Series Forecasting Models specializing in data with seasonality and negligible trend.
 seasonal_models = {}
 
-# Intermittent Demand Forecasting Models that I can support
+# Intermittent Demand Forecasting Models that I can currently support
 id_models = {
     "CROSTON Method": Croston(version = "classic"),
     "SBA": Croston(version = "sba"), # Syntetos-Boylan Approximation
