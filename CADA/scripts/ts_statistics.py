@@ -162,7 +162,7 @@ def has_seasonality(series, p_value: float = 0.05) -> tuple[bool, int]:
 def generate_tsmodel_recommendations(ts_test_results: defaultdict, intermittent: bool = False) -> defaultdict[str, darts.Model]:
     """
     Generates model recommendations based on statistical tests and knowledge about the dataset.
-    
+
     Parameters
     ----------
     ts_test_results: defaultdict
@@ -171,7 +171,7 @@ def generate_tsmodel_recommendations(ts_test_results: defaultdict, intermittent:
         Describes external qualitative knowledge about the given data.
     """
     try:
-        logger.info("Generating forecasting model recommendations based on a given time series dataset.")
+        logger.info("Generating forecasting model recommendations.")
         models = ts_models.baseline_models | defaultdict()
 
         # Intermittent Demand - No Seasonality and Difficult-to-Discern Trend

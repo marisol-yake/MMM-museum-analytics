@@ -4,17 +4,23 @@ import pandas as pd
 from sklearn.model_selection import TimeSeriesSplit
 from ts_statistics import timeseries_stats_tests, generate_tsmodel_recommendations
 from utils import load_dataset
+from config import setup_logging
+
+logger = setup_logging("ts_forecast_pipeline")
+
 
 def main(data_path):
+    logger.info("Beginning time series forecasting pipeline.")
     # Cleaned dataset
-    data = load_dataset(data_path, )
+    data = load_dataset(data_path)
 
     # Time Series Statistical Tests
     results = timeseries_stats_tests(series)
 
     # Generate model recommendations based on statistical tests
     models = generate_tsmodel_recommendations(results)
-    
+
+    logger.info("Splitting time series data for cross-validation.")
     # Time Series Data Cross-Validation
     tscv = TimeSeriesSplit(n = 5)
 

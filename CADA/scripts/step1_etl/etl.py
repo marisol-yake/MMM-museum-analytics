@@ -4,11 +4,13 @@ import re
 import pandas as pd
 import numpy as np
 
+
 ########################################################################################
 # Overall Data Pipeline // Data Cleaning procedures
 def start_pipeline(df):
     # Prevents overwriting data in the pipeline process
     return df.copy()
+
 
 def clean_column_names(df):
     # Prepares column names for easier analysis
@@ -16,10 +18,12 @@ def clean_column_names(df):
     df.columns = [clean_column_name(col) for col in df.columns]
     return df
 
+
 def ensure_dataset_types(df):
     df["acquisition_date"] = pd.to_datetime(df["acquisition_date"], format = "%Y-%m-%d", errors = "coerce")
     df["date"] = pd.to_datetime(df["date"], format = "%Y", errors = "coerce", exact = False)
     return df
+
 
 def fill_null_values(df):
     return df.assign(
@@ -28,11 +32,13 @@ def fill_null_values(df):
         depth_cm = df["depth_cm"].fillna(df["diameter_cm"]),  # Client-sourced: diameter-to-depth null-fill strategy
     )
 
+
 def group_categorical_features(df):
     return df.assign(
         credit_group = df["credit"].astype(str).apply(credit_to_credit_group),  # ref:
         storage_group = df["classification"].apply(classification_to_storage_group),  # Client-sourced: storage group strategy
     )
+
 
 def generate_spatial_features(df):
     cm_to_foot_conversion_factor = 0.0328084
@@ -42,12 +48,14 @@ def generate_spatial_features(df):
         depth_ft = df["depth_cm"] * cm_to_foot_conversion_factor,  # Client-approved: converted to depth (in feet)
     )
 
+
 def calculate_totals(df):
     df = df.assign(cubic_ft=(df["height_ft"] * df["width_ft"] * df["depth_ft"]))  # calculates total cubic_ft
     df["spatial_running_total"] = df["cubic_ft"].cumsum().astype(float)  # captures the total collection space-use over-time
     df["adate_sum"] = df.groupby(["acquisition_date"])["acquisition_date"].transform("size")  # calculates the total records per accession date
     df["acc_gaps"] = df["acquisition_date"].diff()  # the gaps between acquisition dates
     return df
+
 
 def drop_columns(df):
     return df.drop(
@@ -67,6 +75,7 @@ def drop_columns(df):
         ]
     )
 
+
 # Custom Null Value Fill Strategies
 def fill_missing_by_dept_avg(df):
     fill_nulls_by_average = lambda x: x.fillna(x.mean())
@@ -75,6 +84,7 @@ def fill_missing_by_dept_avg(df):
     df.loc[:, "depth_ft"] = df.groupby("department")["depth_ft"].transform(fill_nulls_by_average)
     return df
 
+
 def fill_missing_by_storage_group_avg(df):
     fill_nulls_by_average = lambda x: x.fillna(x.mean())
     df.loc[:, "height_ft"] = df.groupby("storage_group")["height_ft"].transform(fill_nulls_by_average)
@@ -82,8 +92,10 @@ def fill_missing_by_storage_group_avg(df):
     df.loc[:, "depth_ft"] = df.groupby("storage_group")["depth_ft"].transform(fill_nulls_by_average)
     return df
 
+
 def sort_data(df):
     return df.sort_values(by = ["acquisition_date", "object_number"])
+
 
 ########################################################################################
 # Custom Data Cleaning // Grouping Functions
@@ -95,6 +107,7 @@ def credit_to_credit_group(credit: str):
     elif re.search(r"exchange", credit): return "Exchange"
     elif re.search(r"fund", credit): return "Fund"
     else: return "Other"
+
 
 def classification_to_storage_group(classification: str):
     classification = classification.strip().lower()
@@ -110,6 +123,7 @@ def classification_to_storage_group(classification: str):
     elif re.search(r"textile", classification): return "Textile"
     elif re.search(r"furniture", classification): return "Furniture"
     else: return "Other"
+
 
 ########################################################################################
 # Data Pipeline
