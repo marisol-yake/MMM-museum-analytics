@@ -1,19 +1,22 @@
 # Reference
 
+## Extract-Transform-Load
+::: scripts.step1_etl.etl
+
+## Null Value Analysis
+:: scripts.step2_null_analysis.null_analysis
+
+## Exploratory Data Analysis
+::: scripts.step3_eda
+
 ## Time Series Statistics
 ::: scripts.ts_statistics
 
-## Exploratory Data Analysis
-::: scripts.eda
-
-## Extract-Transform-Load
-::: scripts.etl
-
 ## Classical and ML Time Series Forecasting Models
-::: scripts.models
+::: scripts.step4_forecasting
 
 ## Time Series Forecasting Pipeline
-::: scripts.ts_forecast_pipeline
+::: scripts.step4_forecasting
 
 ## CADA Utility Functions
 ::: scripts.utils
