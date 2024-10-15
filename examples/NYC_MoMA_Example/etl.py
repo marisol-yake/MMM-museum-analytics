@@ -193,4 +193,4 @@ def clean_data(file_path):
 
 if __name__ == "__main__":
     file_path = "./data/MoMA NYC artworks.csv"
-    datasets = clean_data(file_path)
+    out = clean_data(file_path)
