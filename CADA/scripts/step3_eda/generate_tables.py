@@ -117,13 +117,13 @@ def save_table(table: pd.DataFrame, table_title: str, table_type: str = "excel")
     try:
         match table_type:
             case "excel" | "xlsx":
-                path = f"/out/tables/{table_title}.xlsx"
+                path = f"./../../out/tables/{table_title}.xlsx"
                 table.to_excel(path)
             case "csv":
-                path = f"/out/tables/{table_title}.csv"
+                path = f"./../../out/tables/{table_title}.csv"
                 table.to_csv(path)
             case _:
-                path = f"/out/tables/{table_title}.xlsx"
+                path = f"./../../out/tables/{table_title}.xlsx"
                 table.to_excel(path)
 
     except Exception as e:

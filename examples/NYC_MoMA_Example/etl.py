@@ -60,6 +60,9 @@ def calculate_totals(df):
 def drop_columns(df):
     return df.drop(
         columns=[
+            "artwork_id",
+            "artist_id",
+            "catalogue",
             "title",
             "name",
             "medium",
@@ -94,7 +97,7 @@ def fill_missing_by_storage_group_avg(df):
 
 
 def sort_data(df):
-    return df.sort_values(by = ["acquisition_date", "object_number"])
+    return df.sort_values(by = ["acquisition_date", "object_number"], ascending = False, axis = "rows")
 
 
 ########################################################################################

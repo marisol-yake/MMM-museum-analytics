@@ -185,9 +185,9 @@ def save_plot(fig, plot_title: str, png=True, pdf=True):
     logger.info("Saving all exploratory analysis plots.")
     try:
         if png:
-            fig.savefig(f"./out/viz/{plot_title}.png", dpi=fig.dpi, bbox_inches="tight")
+            fig.savefig(f"./../../out/viz/{plot_title}.png", dpi=fig.dpi, bbox_inches="tight")
         if pdf:
-            fig.savefig(f"./out/viz/{plot_title}.pdf", dpi=fig.dpi, bbox_inches="tight")
+            fig.savefig(f"./../../out/viz/{plot_title}.pdf", dpi=fig.dpi, bbox_inches="tight")
 
     except Exception as e:
         logger.error("Encountered an error while saving plots: {}".format(e))
