@@ -2,11 +2,12 @@
 # A streamlined script of our time series forecasting process
 # For time series data that can be characterized by having seasonality and trend.
 from darts.models.forecasting import Croston, NaiveDrift, NaiveMovingAverage, ExponentialSmoothing
+from ts_statistics import filter_models
 
 baseline_models = {
     "Naive": NaiveDrift(),
     # AR
-    "Moving Average": NaiveMovingAverage(), 
+    "Moving Average": NaiveMovingAverage(),
     "Exponential Smoothing": ExponentialSmoothing()
 }
 

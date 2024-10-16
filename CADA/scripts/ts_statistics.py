@@ -159,7 +159,7 @@ def has_seasonality(series, p_value: float = 0.05) -> tuple[bool, int]:
     return result
 
 
-def generate_tsmodel_recommendations(ts_test_results: defaultdict, intermittent: bool = False) -> defaultdict[str, darts.Model]:
+def generate_tsmodel_recommendations(ts_test_results: defaultdict, intermittent: bool = False, prediction_type: str = "point") -> defaultdict[str, darts.Model]:
     """
     Generates model recommendations based on statistical tests and knowledge about the dataset.
 
@@ -177,27 +177,47 @@ def generate_tsmodel_recommendations(ts_test_results: defaultdict, intermittent:
         # Intermittent Demand - No Seasonality and Difficult-to-Discern Trend
         if intermittent:
             # intermittent demand forecasting models
-            models = models.id_models  # CROSTON, SBA, TSB
+            models |= models.id_models  # CROSTON, SBA, TSB
 
         # Check for Stationarity
         if ts_test_results["Stationarity"] and not intermittent:
-            models = models.auto_models
+            models |= models.auto_models
 
         elif not ts_test_results["Stationarity"] and not intermittent:
             # Seasonality and Non-Negligible Trend
             if ts_test_results["Seasonality"] and np.abs(ts_test_results["Trend"][1]) >= 0.01:
-                models = models.st_models
+                models |= models.st_models
 
             # Seasonality and Negligible Trend
             elif ts_test_results["Seasonality"] and np.abs(ts_test_results["Trend"][1]) < 0.01:
-                models = models.seasonal_models
+                models |= models.seasonal_models
+
+        # Filter recommendations by prediction_type, useful for comparisons
+        match prediction_type:
+            case "point|deterministic":
+                models = filter_models(models, lambda model: not model.supports_probabilistic_predictions)
+
+            case "prob|probabilistic":
+                models = filter_models(models, lambda model: model.supports_probabilistic_predictions)
 
     except Exception as e:
         logger.error("Encountered an error while generating forecasting model recommendations: {}".format(e))
         raise Exception("Encountered an error while generating forecasts model recommendations: {}".format(e))
 
     logger.info("Successfully generated forecasts model recommendations: {}".format(models))
+
     return models
+
+
+def filter_models(models: defaultdict[str, darts.models.Model], condition: lambda_) -> defaultdict[str, darts.models.Model]:
+    # deterministic | probabilistic/stochastic
+    # Dev Note: hack to maintain defaultdict type
+    models_out = defaultdict(darts.models.Model)
+    return models_out | {
+        model_name: models[model_name]
+        for model_name in models
+        if condition
+        }
 
 
 def timeseries_stats_tests(series: pd.Series, model: str, p_value: float = 0.05) -> defaultdict:

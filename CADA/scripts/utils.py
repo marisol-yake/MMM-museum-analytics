@@ -36,6 +36,10 @@ def load_dataset(data_path: str) -> pd.DataFrame:
     return dataset
 
 
+def identical_dfs(x: pd.DataFrame, y: pd.DataFrame) -> bool:
+    return x.equals(y)
+
+
 def format_title(func: str, *args: str) -> str:
     """Formats plot titles."""
     try:
