@@ -3,8 +3,8 @@
 import pandas as pd
 import os
 from utils import format_title, load_dataset
-from generate_tables import generate_eda_tables
-from generate_plots import generate_eda_plots
+from generate_tables import generate_eda_tables, save_table
+from generate_plots import generate_eda_plots, save_plot
 from config import setup_logging
 
 
@@ -36,8 +36,12 @@ def main(data_path: os.path.Path, export: bool = False) -> None:
         if export:
             logger.info("Saving all plots and tables.")
             # Save Plots
+            for title, plot in plots.items():
+                save_plot(plot, title, png = True, pdf = False)
 
             # Save Tables
+            for title, table in tables.items():
+                save_table(table, title, table_type = "excel")
 
     except Exception as e:
         logger.error("Encountered an error during exploratory data analysis: {}".format(e))

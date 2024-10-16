@@ -13,18 +13,19 @@ def main(data_path):
     logger.info("Beginning time series forecasting pipeline.")
     # Cleaned dataset
     data = load_dataset(data_path)  # Load into darts.TimeSeries object
-    target_series = TimeSeries(data, "adate_sum")
 
     logger.info("Splitting data into target (count) series and exogenous (external) variables.")
-    logger.info("Setting aside data for CatBoost.")
-    # Catboost performs better without categorical encoding
-    catboost_exo_series = TimeSeries(data,
-                                     # Custom Time Series Features
-                                     ["lag_1", "lag_2", "lag_3", "lag_4",
-                                      "lag_5", "lag_10", "lag_15", "lag_20",
-                                      "day", "day_of_week", "day_of_month",
-                                      "week_of_month", "week", "month_of_year",
-                                      "month", "year"])
+    target_series = TimeSeries(data, "adate_sum")
+
+    # logger.info("Setting aside data for CatBoost.")
+    # # Catboost performs better without categorical encoding
+    # catboost_exo_series = TimeSeries(data,
+    #                                  # Custom Time Series Features
+    #                                  ["lag_1", "lag_2", "lag_3", "lag_4",
+    #                                   "lag_5", "lag_10", "lag_15", "lag_20",
+    #                                   "day", "day_of_week", "day_of_month",
+    #                                   "week_of_month", "week", "month_of_year",
+    #                                   "month", "year"])
 
     logger.info("Encoding categorical variables for all other models.")
     # exogenous_series = data.copy().apply(CategoricalEncoder().transform())
@@ -45,9 +46,8 @@ def main(data_path):
                                               intermittent = True,
                                               forecast_type = "point")
 
-    logger.info("Splitting time series data for cross-validation.")
-    # Time Series Data Cross-Validation
-    tscv = TimeSeriesSplit(n = 5)
+    # logger.info("Splitting time series data for cross-validation.")
+    # TODO: Integrate pipeline and tscv logic from demo forecast
 
     # Generate model metrics from fit (predictions against true data)
 

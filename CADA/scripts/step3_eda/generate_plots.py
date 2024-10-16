@@ -178,3 +178,19 @@ def generate_eda_plots(df: pd.DataFrame, hues: list[str]) -> defaultdict[str, sn
 
     logger.info("Successfully generated exploratory analysis plots.")
     return plots
+
+
+def save_plot(fig, plot_title: str, png=True, pdf=True):
+    """Save plots to PDF or PNG image file formats."""
+    logger.info("Saving all exploratory analysis plots.")
+    try:
+        if png:
+            fig.savefig(f"./out/viz/{plot_title}.png", dpi=fig.dpi, bbox_inches="tight")
+        if pdf:
+            fig.savefig(f"./out/viz/{plot_title}.pdf", dpi=fig.dpi, bbox_inches="tight")
+
+    except Exception as e:
+        logger.error("Encountered an error while saving plots: {}".format(e))
+        raise Exception("Encountered an error while saving plots: {}".format(e))
+
+    logger.info("Successfully saved all generated plots.")

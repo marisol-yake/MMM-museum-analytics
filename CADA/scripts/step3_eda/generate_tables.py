@@ -1,5 +1,7 @@
 """
 """
+import os
+from pathlib import Path
 import pandas as pd
 from utils import format_title, split_columns_by_type
 from collections import defaultdict
@@ -108,3 +110,24 @@ def generate_eda_tables(df: pd.DataFrame, hues: list[str]) -> defaultdict[str, p
 
     logger.info("Successfully generated exploratory analysis tables.")
     return tables
+
+
+def save_table(table: pd.DataFrame, table_title: str, table_type: str = "excel") -> None:
+    logger.info("Saving all exploratory analysis tables.")
+    try:
+        match table_type:
+            case "excel" | "xlsx":
+                path = f"/out/tables/{table_title}.xlsx"
+                table.to_excel(path)
+            case "csv":
+                path = f"/out/tables/{table_title}.csv"
+                table.to_csv(path)
+            case _:
+                path = f"/out/tables/{table_title}.xlsx"
+                table.to_excel(path)
+
+    except Exception as e:
+        logger.error("Encountered an error while saving all tables: {}".format(e))
+        raise Exception("Encountered an error while saving all tables: {}".format(e))
+
+    logger.info("Succesfully saved all tables.")
