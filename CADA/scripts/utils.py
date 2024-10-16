@@ -68,3 +68,11 @@ def split_columns_by_type(df: pd.DataFrame) -> list[str]:
 
     logger.info("Successfully split pd.DataFrame columns by data type.")
     return cat_cols, num_cols
+
+
+def calculate_confidence_intervals_95(df: pd.DataFrame, column: str) -> tuple[float, float]:
+    # Calculate mean and 95% CI
+    mean = df[column].mean()
+    std_err = df[column].std() / np.sqrt(df.shape[0])  # Standard error calculation
+    lower_bound, upper_bound = (mean - 1.96 * std_err, mean + 1.96 * std_err)  # CI calculation
+    return lower_bound, upper_bound

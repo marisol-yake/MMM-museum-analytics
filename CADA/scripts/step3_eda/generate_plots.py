@@ -5,7 +5,7 @@ from collections import defaultdict
 
 from matplotlib import pyplot as plt
 import numpy as np
-from utils import format_title, split_columns_by_type
+from utils import calculate_confidence_intervals_95, format_title, split_columns_by_type
 from itertools import permutations
 import pandas as pd
 import seaborn as sns
@@ -69,12 +69,14 @@ def generate_distribution_plots(df: pd.DataFrame, *hues: tuple[str]) -> defaultd
 
         for x in df.columns:
             logger.info("Generating plots for column: {}".format(x))
+            ci = calculate_confidence_intervals_95(df, x)
+
             # Histogram: No split on hue -- Overall view
             plot_name = format_title("hist.", x)
             histplot = sns.displot(data = df, x = x, kind = "hist")
-            plt.axvline(histplot, np.mean(df[x]), color="red")
-            plt.axvline(histplot, np.mean(df[x]), color="red")
-            plt.axvline(histplot, np.mean(df[x]), color="red")
+            histplot.axvline(np.mean(df[x]), color="red")
+            histplot.axvline(ci[0], color="gray", linestyle = "--")
+            histplot.axvline(ci[1], color="gray", linestyle = "--")
             plots[plot_name] = histplot
 
             # ECDF: No split on hue -- Overall view
