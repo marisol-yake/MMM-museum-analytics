@@ -43,11 +43,17 @@ def generate_ts_features(df: pd.DataFrame, date_column: str, *add_cols: str) -> 
     try:
         logger.info("Generating operational time series features.")
         df = df[date_column, add_cols].copy().sort_values(date_column)
-        df["day_of_week"] = df[date_column].dt.day_name()
-        df["week_of_month"] = (df.date_column.day / 7).apply(lambda x: np.ceil(x))
-        df["week_of_year"] = df[date_column].dt.isocalendar().week
-        df["month_of_year"] = df[date_column].dt.month_name()
-        df["year"] = df[date_column].dt.isocalendar().year
+        df.apply(
+            day = df[date_column].dt.day,
+            day_of_week = df[date_column].dt.day_name(),
+            day_of_month = ...,
+            week_of_month = (df.date_column.day / 7).apply(lambda x: np.ceil(x)),
+            week = df[date_column].dt.isocalendar().week,
+            month = df[date_column].dt.isocalendar().month,
+            year = df[date_column].dt.isocalendar().year,
+            month_of_year = df[date_column].dt.month_name(),
+        )
+
     except Exception as e:
         logger.error("Encountered error when generating operational time series features: {}".format(e))
         raise Exception("Encountered error when generating operational time series features: {}".format(e))

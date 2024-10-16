@@ -2,6 +2,9 @@
 """
 from typing import Callable
 from collections import defaultdict
+
+from matplotlib import pyplot as plt
+import numpy as np
 from utils import format_title, split_columns_by_type
 from itertools import permutations
 import pandas as pd
@@ -68,7 +71,11 @@ def generate_distribution_plots(df: pd.DataFrame, *hues: tuple[str]) -> defaultd
             logger.info("Generating plots for column: {}".format(x))
             # Histogram: No split on hue -- Overall view
             plot_name = format_title("hist.", x)
-            plots[plot_name] = sns.displot(data = df, x = x, kind = "hist")
+            histplot = sns.displot(data = df, x = x, kind = "hist")
+            plt.axvline(histplot, np.mean(df[x]), color="red")
+            plt.axvline(histplot, np.mean(df[x]), color="red")
+            plt.axvline(histplot, np.mean(df[x]), color="red")
+            plots[plot_name] = histplot
 
             # ECDF: No split on hue -- Overall view
             plot_name = + format_title("ecdf.", x)
