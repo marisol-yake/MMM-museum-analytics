@@ -3,17 +3,18 @@
 import os
 from pathlib import Path
 import pandas as pd
-from utils import format_title, split_columns_by_type
+from scripts.utils import format_title, split_columns_by_type
+from scripts.config import setup_logging
 from collections import defaultdict
-from itertools import permutations
-from config import setup_logging
+from itertools import pairwise, permutations
+
 
 
 logger = setup_logging("generate_tables")
 
 
 # Tables
-def generate_relational_tables(*hues, **kwargs) -> defaultdict[str, pd.DataFrame]:
+def generate_relational_tables(dataset: pd.DataFrame, x: str, y: str, *hues) -> defaultdict[str, pd.DataFrame]:
     """
     Generate descriptive statistics tables for variables x and y.
     Optional argument: hues, allows for descriptive statistics per hue group.
@@ -21,14 +22,15 @@ def generate_relational_tables(*hues, **kwargs) -> defaultdict[str, pd.DataFrame
     try:
         logger.info("Generating relational tables.")
         tables = defaultdict()
-        df, x, y = kwargs.get("df"), kwargs.get("x"), kwargs.get("y")
 
         table_name = format_title("rl.table", x, y)
-        tables[table_name] = df[x, y].describe()
+        tables[table_name] = dataset[[x, y]].describe()
 
-        for hue in hues:
-            table_name = format_title("groupby.rl.table", x, y, hue)
-            tables[table_name] = df[x, y, hue].groupby(hue).describe()
+        # TODO: Repair plotting by hue
+        # for hue in hues:
+        #     table_name = format_title("groupby.rl.table", x, y, hue)
+        #     tables[table_name] = dataset[x, y, hue].groupby(hue).describe()
+
     except Exception as e:
         logger.error("Encountered an error while generating relational tables: {}".format(e))
         raise Exception("Encountered an error while generating relational tables: {}".format(e))
@@ -66,6 +68,7 @@ def generate_categorical_tables(df: pd.DataFrame) -> pd.DataFrame:
         tables = defaultdict()
 
         for col in df.columns:
+            logger.info("Generating counts")
             table_title = "table.{col}_counts"
             tables[table_title] = df[col].value_counts().to_frame()
         # Possible to add hue-groupby
@@ -84,25 +87,20 @@ def generate_eda_tables(df: pd.DataFrame, hues: list[str]) -> defaultdict[str, p
         tables = defaultdict()
         categorical_cols, numerical_cols = split_columns_by_type(df)
         cat_subset = df[categorical_cols].copy()
+        tables = defaultdict()
 
-        # NOTE: Currently produces 1-redundant permutation
-        # Works for now for having both angles for data story telling.
-        permutations = [list(perm) for perm in permutations(numerical_cols)]
-        for permutation in permutations:
+        for pair in pairwise(numerical_cols):
             # Splitting for easier readability
-            x, y = permutation[0], permutation[1]
+            x, y = pair[0], pair[1]
 
             # Relational Tables -- for each x-y permutation
-            rel_tables = generate_relational_tables(df, x, y, hues)
+            tables |= generate_relational_tables(df, x, y, hues)
 
         # Distribution Tables
-        dist_tables = generate_distribution_tables(df, hues)
+        tables |= generate_distribution_tables(df)
 
         # Categorical Tables
-        cat_tables = generate_categorical_tables(cat_subset)
-
-        # Update tables dictionary with all (unrendered) results.
-        tables = tables | rel_tables | dist_tables | cat_tables
+        tables |= generate_categorical_tables(cat_subset)
 
     except Exception as e:
         logger.error("Encountered an error while generating exploratory analysis tables: {}".format(e))
@@ -113,21 +111,21 @@ def generate_eda_tables(df: pd.DataFrame, hues: list[str]) -> defaultdict[str, p
 
 
 def save_table(table: pd.DataFrame, table_title: str, table_type: str = "excel") -> None:
-    logger.info("Saving all exploratory analysis tables.")
+    logger.info("Saving an exploratory analysis tables.")
     try:
         match table_type:
             case "excel" | "xlsx":
-                path = f"./../../out/tables/{table_title}.xlsx"
+                path = f"./out/tables/{table_title}.xlsx"
                 table.to_excel(path)
             case "csv":
-                path = f"./../../out/tables/{table_title}.csv"
+                path = f"./out/tables/{table_title}.csv"
                 table.to_csv(path)
             case _:
-                path = f"./../../out/tables/{table_title}.xlsx"
+                path = f"./out/tables/{table_title}.xlsx"
                 table.to_excel(path)
 
     except Exception as e:
         logger.error("Encountered an error while saving all tables: {}".format(e))
         raise Exception("Encountered an error while saving all tables: {}".format(e))
 
-    logger.info("Succesfully saved all tables.")
+    logger.info("Succesfully saved an exploratory analysis table.")
