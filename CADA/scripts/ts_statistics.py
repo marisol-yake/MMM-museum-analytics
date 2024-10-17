@@ -1,17 +1,17 @@
 #!/usr/bin/python
 from collections import defaultdict
+import darts
 from darts.utils.statistics import check_seasonality, stationarity_tests, plot_residuals_analysis
 import pandas as pd
 import numpy as np
-from config import setup_logging
-from step4_forecasting import ts_models
+from .config import setup_logging
 
 
 logger = setup_logging("ts_statistics")
 
 
 # Time Series Functions
-def generate_ts_features(df: pd.DataFrame, date_column: str, *add_cols: str) -> pd.DataFrame:
+def generate_ts_features(df: pd.DataFrame, date_column: str, add_cols: list[str]) -> pd.DataFrame:
     """
     Generates times series features onto a new pd.DataFrame for a given date column. 
     Especially useful for analyzing data at the operational (day-to-day) level.
@@ -42,23 +42,22 @@ def generate_ts_features(df: pd.DataFrame, date_column: str, *add_cols: str) -> 
     # Makes for easier analysis of operational (day-to-day) processes.
     try:
         logger.info("Generating operational time series features.")
-        df = df[date_column, add_cols].copy().sort_values(date_column)
-        df.apply(
-            day = df[date_column].dt.day,
-            day_of_week = df[date_column].dt.day_name(),
-            day_of_month = ...,
-            week_of_month = (df.date_column.day / 7).apply(lambda x: np.ceil(x)),
-            week = df[date_column].dt.isocalendar().week,
-            month = df[date_column].dt.isocalendar().month,
-            year = df[date_column].dt.isocalendar().year,
-            month_of_year = df[date_column].dt.month_name(),
-        )
+        df = df[[date_column] + add_cols].copy()
+        df[date_column] = pd.to_datetime(df[date_column], format = "%m/%d/%Y", errors = "coerce")
+
+        df["day"] = df[date_column].dt.isocalendar().day
+        df["day_of_week"] = df[date_column].dt.day_name()
+        df["day_of_month"] = (df[date_column].dt.day / 30.5).apply(lambda x: np.ceil(x))
+        df["week_of_month"] = (df[date_column].dt.day / 7).apply(lambda x: np.ceil(x))
+        df["week"] = df[date_column].dt.isocalendar().week
+        df["month"] = df[date_column].dt.month
+        df["year"] = df[date_column].dt.isocalendar().year
 
     except Exception as e:
         logger.error("Encountered error when generating operational time series features: {}".format(e))
         raise Exception("Encountered error when generating operational time series features: {}".format(e))
 
-    logger.info("Successfully generated operational time series features {}".format(df.columns[-5:].values))
+    logger.info("Successfully generated operational time series features {}".format(df.columns[-7:].values))
     return df
 
 
@@ -165,7 +164,7 @@ def has_seasonality(series, p_value: float = 0.05) -> tuple[bool, int]:
     return result
 
 
-def generate_tsmodel_recommendations(ts_test_results: defaultdict, intermittent: bool = False, prediction_type: str = "point") -> defaultdict[str, darts.Model]:
+def generate_tsmodel_recommendations(ts_test_results: defaultdict, intermittent: bool = False, prediction_type: str = "point") -> defaultdict:
     """
     Generates model recommendations based on statistical tests and knowledge about the dataset.
 
@@ -215,7 +214,7 @@ def generate_tsmodel_recommendations(ts_test_results: defaultdict, intermittent:
     return models
 
 
-def filter_models(models: defaultdict[str, darts.models.Model], condition: lambda_) -> defaultdict[str, darts.models.Model]:
+def filter_models(models: defaultdict, condition) -> defaultdict:
     # deterministic | probabilistic/stochastic
     # Dev Note: hack to maintain defaultdict type
     models_out = defaultdict(darts.models.Model)

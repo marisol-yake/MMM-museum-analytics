@@ -63,8 +63,8 @@ def split_columns_by_type(df: pd.DataFrame) -> list[str]:
     """Columns are split into Categorical and Numerical groupings."""
     try:
         logger.info("Splitting dataset into subsets based on datatype.")
-        cat_cols = df.select_dtypes(include=["object", "category"]).columns
-        num_cols = df.select_dtypes(exclude=["object", "category"]).columns
+        cat_cols = [column for column in df.select_dtypes(include=["object", "category", "datetime"]).columns if "date" in column]
+        num_cols = [column for column in df.select_dtypes(exclude=["object", "category", "datetime"]).columns if "date" not in column]
 
     except Exception as e:
         logger.error("Error occurred when trying to split pd.DataFrame columns by data type.")
@@ -80,3 +80,15 @@ def calculate_confidence_intervals_95(df: pd.DataFrame, column: str) -> tuple[fl
     std_err = df[column].std() / np.sqrt(df.shape[0])  # Standard error calculation
     lower_bound, upper_bound = (mean - 1.96 * std_err, mean + 1.96 * std_err)  # CI calculation
     return lower_bound, upper_bound
+
+
+def remove_outliers(dataset, q1 = 0.25, q3 = 0.75):
+    # Remove numerical outliers from the dataset
+    dataset.astype(np.float64)
+    Q1 = dataset.quantile(q1)
+    Q3 = dataset.quantile(q3)
+    IQR = Q3 - Q1
+    lower_outliers = Q1 - (1.5 * IQR)
+    upper_outliers = Q3 + (1.5 * IQR)
+
+    return dataset[(dataset > lower_outliers) & (dataset < upper_outliers)]

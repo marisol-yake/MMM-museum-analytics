@@ -2,13 +2,14 @@
 # A streamlined script of our comprehensive exploratory data visualization process
 import os
 from pathlib import Path
+import numpy as np
 import pandas as pd
 import sys
-from ..utils import format_title, load_dataset
+from ..utils import format_title, load_dataset, remove_outliers, split_columns_by_type
 from ..config import setup_logging
+from ..ts_statistics import generate_ts_features
 from .generate_tables import generate_eda_tables, save_table
-from .generate_plots import generate_eda_plots, save_plot
-
+from .generate_plots import generate_eda_plots
 
 logger = setup_logging("eda")
 
@@ -27,29 +28,24 @@ def main(data_path: Path, export: bool = False) -> None:
             "adate_sum", "acc_gaps"
         ]
         dataset = load_dataset(data_path, usecols = analysis_columns).sample(100)
+        categorical_cols, numerical_cols = split_columns_by_type(dataset)
 
         # specified categorical columns of interest
         # e.g. department, storage_group, etc.
         # these can include custom columns generated during data preprocessing.
-        hue_categories = ["credit", "department", "storage_group"]
+        hue_categories = ["credit_group", "department", "storage_group"]
+
+        dataset.loc[:, numerical_cols] = remove_outliers(dataset[numerical_cols])
 
         print("Preparing exploratory plots.")
-        # Generate Plots
-        plots = generate_eda_plots(dataset, hues = hue_categories)
+        # Generate Plots - Plots are exported by default
+        generate_eda_plots(dataset, hues = hue_categories)
 
         print("Preparing exploratory tables.")
         # Generate Tables
         tables = generate_eda_tables(dataset, hues = hue_categories)
-
-        if export:
-            logger.info("Saving plots and tables.")
-            # Save Plots
-            for title, plot in plots.items():
-                save_plot(plot, title)
-
-            # Save Tables
-            for title, table in tables.items():
-                save_table(table, title, table_type = "excel")
+        for title, table in tables.items():
+            save_table(table, title, table_type = "excel")
 
     except Exception as e:
         logger.error("Encountered an error during exploratory data analysis: {}".format(e))

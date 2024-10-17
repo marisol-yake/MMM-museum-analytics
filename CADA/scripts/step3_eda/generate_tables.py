@@ -21,7 +21,7 @@ def generate_relational_tables(dataset: pd.DataFrame, x: str, y: str, *hues) -> 
     """
     try:
         logger.info("Generating relational tables.")
-        tables = defaultdict()
+        tables = defaultdict(str)
 
         table_name = format_title("rl.table", x, y)
         tables[table_name] = dataset[[x, y]].describe()
@@ -45,7 +45,7 @@ def generate_distribution_tables(df: pd.DataFrame) -> defaultdict[str, pd.DataFr
     """
     try:
         logger.info("Generating distribution tables.")
-        tables = defaultdict()
+        tables = defaultdict(str)
 
         for x in df.columns:
             table_title = format_title("dist.table", x)
@@ -65,11 +65,11 @@ def generate_categorical_tables(df: pd.DataFrame) -> pd.DataFrame:
     """
     try:
         logger.info("Generating categorical tables.")
-        tables = defaultdict()
+        tables = defaultdict(str)
 
         for col in df.columns:
             logger.info("Generating counts")
-            table_title = "table.{col}_counts"
+            table_title = f"table.{col}_counts"
             tables[table_title] = df[col].value_counts().to_frame()
         # Possible to add hue-groupby
 
@@ -84,10 +84,9 @@ def generate_eda_tables(df: pd.DataFrame, hues: list[str]) -> defaultdict[str, p
     """Iteratively plots all numerical columns against one another."""
     try:
         logger.info("Generating exploratory analysis tables.")
-        tables = defaultdict()
+        tables = defaultdict(str)
         categorical_cols, numerical_cols = split_columns_by_type(df)
         cat_subset = df[categorical_cols].copy()
-        tables = defaultdict()
 
         for pair in pairwise(numerical_cols):
             # Splitting for easier readability
