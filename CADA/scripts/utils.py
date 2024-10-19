@@ -82,13 +82,3 @@ def calculate_confidence_intervals_95(df: pd.DataFrame, column: str) -> tuple[fl
     return lower_bound, upper_bound
 
 
-def remove_outliers(dataset, q1 = 0.25, q3 = 0.75):
-    # Remove numerical outliers from the dataset
-    dataset.astype(np.float64)
-    Q1 = dataset.quantile(q1)
-    Q3 = dataset.quantile(q3)
-    IQR = Q3 - Q1
-    lower_outliers = Q1 - (1.5 * IQR)
-    upper_outliers = Q3 + (1.5 * IQR)
-
-    return dataset[(dataset > lower_outliers) & (dataset < upper_outliers)]

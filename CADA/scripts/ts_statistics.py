@@ -45,8 +45,8 @@ def generate_ts_features(df: pd.DataFrame, date_column: str, add_cols: list[str]
         df = df[[date_column] + add_cols].copy()
         df[date_column] = pd.to_datetime(df[date_column], format = "%m/%d/%Y", errors = "coerce")
 
-        df["day"] = df[date_column].dt.isocalendar().day
-        df["day_of_week"] = df[date_column].dt.day_name()
+        df["weekday"] = df[date_column].dt.day_name()
+        df["day_of_week"] = df[date_column].dt.isocalendar().day
         df["day_of_month"] = (df[date_column].dt.day / 30.5).apply(lambda x: np.ceil(x))
         df["week_of_month"] = (df[date_column].dt.day / 7).apply(lambda x: np.ceil(x))
         df["week"] = df[date_column].dt.isocalendar().week
