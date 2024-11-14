@@ -11,6 +11,8 @@ def start_pipeline(df):
     # Prevents overwriting data in the pipeline process
     return df.copy()
 
+def sort_data(df):
+    return df.sort_values(by = ["acquisition_date", "object_number"], ascending = True, axis = "rows")
 
 def clean_column_names(df):
     # Prepares column names for easier analysis
@@ -50,10 +52,10 @@ def generate_spatial_features(df):
 
 
 def calculate_totals(df):
-    df = df.assign(cubic_ft=(df["height_ft"] * df["width_ft"] * df["depth_ft"]))  # calculates total cubic_ft
+    df["cubic_ft"] = (df["height_ft"] * df["width_ft"] * df["depth_ft"])  # calculates total cubic_ft
     df["spatial_running_total"] = df["cubic_ft"].cumsum().astype(float)  # captures the total collection space-use over-time
-    df["adate_sum"] = df.groupby(["acquisition_date"])["acquisition_date"].transform("size")  # calculates the total records per accession date
-    df["acc_gaps"] = df["acquisition_date"].diff()  # the gaps between acquisition dates
+    df["acq_total"] = df.groupby(["acquisition_date"])["acquisition_date"].transform("size")  # calculates the total records per accession date
+    df["acq_gaps"] = df["acquisition_date"].diff()  # the gaps between acquisition dates
     return df
 
 
@@ -94,10 +96,6 @@ def fill_missing_by_storage_group_avg(df):
     df.loc[:, "width_ft"] = df.groupby("storage_group")["width_ft"].transform(fill_nulls_by_average)
     df.loc[:, "depth_ft"] = df.groupby("storage_group")["depth_ft"].transform(fill_nulls_by_average)
     return df
-
-
-def sort_data(df):
-    return df.sort_values(by = ["acquisition_date", "object_number"], ascending = False, axis = "rows")
 
 
 ########################################################################################
