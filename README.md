@@ -1,10 +1,10 @@
 # CADA – An MMM Museum Analytics Pilot
-<img alt="Promotional Banner Image, Collections & Data Analysis (cada)](./examples/NYC_MoMA_Example/CADA-banner.png)
+<img alt="Promotional Banner Image, Collections & Data Analysis (cada) href="./examples/NYC_MoMA_Example/CADA-banner.png">
 
 Welcome to CADA, a Mountain Museum Management (MMM) Analytics Pilot Project!
 
 ## Introducing CADA
-<img alt="CADA Data Work Promotional Image, Stylized definition of "cada"](./examples/NYC_MoMA_Example/media.png)
+<img alt="CADA Data Work Promotional Image, Stylized definition of "cada"" href="./examples/NYC_MoMA_Example/media.png">
 
 We are proud to present our very own museum analytics pilot. Our project is focused on illuminating potential benefits for museum collections professionals interested aligning their data work with their operational procedures and organizational values. Ranging from improving worker-experience of data entry, enhancing dataset integrity, visualizing collection diversity, to augmenting day-to-day operations and collections storage procedures. We want to automate our analysis processes specifically to make more time for collaborating alongside our clients and their teams.
 
@@ -23,16 +23,16 @@ If you have any questions about the analysis, the accompanying code, or just wan
 ____
 ## 3 Stages of Analysis
 ### Null Analysis
-"Checking out the packaging" on the NYC MoMA artwork collections dataset. Reveals potential pain points in data work processes.
-<img alt="Collections Null Analysis.ipynb" href="./examples/NYC_MoMA_Example/Collections Null Analysis.ipynb">
+"Checking out the packaging" on the NYC MoMA artwork collections dataset.<br>Reveals potential pain points in data work processes.<br>
+[Collections Null Analysis.ipynb](./examples/NYC_MoMA_Example/Collections Null Analysis.ipynb)
 
 ### Exploratory Analysis
-An extensive exploration of trends in found in the collections data. Reveals historical trends about space-use and daily acquisitions.
-<img alt="Collections Exploratory Data Analysis (EDA).ipynb" href="./examples/NYC_MoMA_Example/Collections Null Analysis.ipynb">
+An extensive exploration of trends in found in the collections data.<br> Reveals historical trends about space-use and daily acquisitions.<br>
+[Collections Exploratory Data Analysis (EDA).ipynb](./examples/NYC_MoMA_Example/Collections Null Analysis.ipynb)
 
 ### Time Series Forecasting
-Applying statistical and ML modeling to estimate future collections. Reveals how ML can assist museum professionals in decision-making.
-<img alt="Collections Null Analysis.ipynb" href="./examples/NYC_MoMA_Example/Collections Null Analysis.ipynb">
+Applying statistical and ML modeling to estimate future collections.<br> Reveals how ML can assist museum professionals in decision-making.<br>
+[Collections Null Analysis.ipynb](./examples/NYC_MoMA_Example/Collections Null Analysis.ipynb)
 ____
 ## Data Analysis Tools
 Python - A general purpose programming language, very popular in the programming community for its readability and ease-of-use.
