@@ -4,7 +4,7 @@
 Welcome to CADA, a Mountain Museum Management (MMM) Analytics Pilot Project!
 
 ## Introducing CADA
-<img alt="CADA Data Work Promotional Image, Stylized definition of 'cada'" src="./examples/NYC_MoMA_Example/media.png" width="60%" items-align="center">
+<img alt="CADA Data Work Promotional Image, Stylized definition of 'cada'" src="./examples/NYC_MoMA_Example/media.png" width="60%" content-align="center">
 
 We are proud to present our very own museum analytics pilot. Our project is focused on illuminating potential benefits for museum collections professionals interested aligning their data work with their operational procedures and organizational values. Ranging from improving worker-experience of data entry, enhancing dataset integrity, visualizing collection diversity, to augmenting day-to-day operations and collections storage procedures. We want to automate our analysis processes specifically to make more time for collaborating alongside our clients and their teams.
 
