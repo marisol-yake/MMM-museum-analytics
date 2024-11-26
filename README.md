@@ -24,15 +24,15 @@ ____
 ## 3 Stages of Analysis
 ### Null Analysis
 "Checking out the packaging" on the NYC MoMA artwork collections dataset.<br>Reveals potential pain points in data work processes.<br>
-[Collections Null Analysis.ipynb](./examples/NYC_MoMA_Example/Collections Null Analysis.ipynb)
+<a href="./examples/NYC_MoMA_Example/Collections Null Analysis.ipynb">Collections Null Analysis.ipynb</a>
 
 ### Exploratory Analysis
 An extensive exploration of trends in found in the collections data.<br> Reveals historical trends about space-use and daily acquisitions.<br>
-[Collections Exploratory Data Analysis (EDA).ipynb](./examples/NYC_MoMA_Example/Collections Null Analysis.ipynb)
+<a href="./examples/NYC_MoMA_Example/Collections Null Analysis.ipynb">Collections Exploratory Data Analysis (EDA).ipynb</a>
 
 ### Time Series Forecasting
 Applying statistical and ML modeling to estimate future collections.<br> Reveals how ML can assist museum professionals in decision-making.<br>
-[Collections Null Analysis.ipynb](./examples/NYC_MoMA_Example/Collections Null Analysis.ipynb)
+<a href="./examples/NYC_MoMA_Example/Collections Null Analysis.ipynb">Collections Null Analysis.ipynb</a>
 ____
 ## Data Analysis Tools
 Python - A general purpose programming language, very popular in the programming community for its readability and ease-of-use.
