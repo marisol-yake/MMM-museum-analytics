@@ -4,7 +4,7 @@
 Welcome to CADA, a Mountain Museum Management (MMM) Analytics Pilot Project!
 
 ## Introducing CADA
-![CADA Data Work Promotional Image, Stylized definition of "cada"](./examples/NYC_MoMA_Example/media.png)
+![CADA Data Work Promotional Image, Stylized definition of "cada"](./examples/NYC_MoMA_Example/media.png){: width="50%" items-align="center"}
 
 We are proud to present our very own museum analytics pilot. Our project is focused on illuminating potential benefits for museum collections professionals interested aligning their data work with their operational procedures and organizational values. Ranging from improving worker-experience of data entry, enhancing dataset integrity, visualizing collection diversity, to augmenting day-to-day operations and collections storage procedures. We want to automate our analysis processes specifically to make more time for collaborating alongside our clients and their teams.
 
@@ -16,7 +16,7 @@ Our team strongly values a bottom up approach, in analysis and in project outcom
 In the interest of motivating how data work could be relevant to museum professionals, our CADA team has prepared a protoype that includes extensive documentation which describe **how** and **why** we arrived at our decisions. All code is written to be as human-readable as possible, however reading the code is not necessary for understanding the project nor our team's practice. Ideally, we want to reveal our process and code so that museum professionals can understand our team's values as well as have code to take for future reference in their own data-driven endeavours.
 
 ## Contact us
-If you have any questions about the analysis, the accompanying code, or just wanna chat about this project, check out our website: museum-mgmt.com/cada, or email me at: marisol.yake(at)outlook.com
+If you have any questions about the analysis, the accompanying code, or just wanna chat about this project, check out our website: **museum-mgmt.com/cada**, or email me at: **marisol.yake(at)outlook.com**
 
 <!-- **Project (expected) durations:**
 **Project (expected) costs:** -->
