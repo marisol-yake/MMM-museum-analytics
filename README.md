@@ -1,5 +1,5 @@
 # CADA – An MMM Museum Analytics Pilot
-<img alt="Promotional Banner Image, Collections & Data Analysis (cada)" src="./examples/NYC_MoMA_Example/CADA-banner.png">
+<img alt="Promotional Banner Image, Collections & Data Analysis (cada)" src="./examples/NYC_MoMA_Example/CADA-"https://github.com/anki-editor/anki-editorbanner.png">
 
 Welcome to CADA, a Mountain Museum Management (MMM) Analytics Pilot Project!
 
