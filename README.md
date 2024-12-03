@@ -23,16 +23,41 @@ If you have any questions about the analysis, the accompanying code, or just wan
 ____
 ## 3 Stages of Analysis
 ### Null Analysis
-"Checking out the packaging" on the NYC MoMA artwork collections dataset.<br>Reveals potential pain points in data work processes.<br>
 **Link to file:** <a href="./examples/NYC_MoMA_Example/Collections Null Analysis.ipynb">Collections Null Analysis.ipynb</a>
+<br>
+"Checking out the packaging" on the NYC MoMA artwork collections dataset.<br><br>
+This step is crucial for identifying bottlenecks in data work early on and informing the conditions for the remaining analyses. By addressing data work processes early on in analysis, the CADA seeks to ensure that data processes actually belong to an organization and can be continued independently.
+<br>Answers: **Do the patterns of missing records (data) reveal any challenges to organizational data entry processes?**
+
 
 ### Exploratory Analysis
-An extensive exploration of trends in found in the collections data.<br> Reveals historical trends about space-use and daily acquisitions.<br>
 **Link to file:** <a href="./examples/NYC_MoMA_Example/Collections Null Analysis.ipynb">Collections Exploratory Data Analysis (EDA).ipynb</a>
+<br>
+An extensive exploration of trends in found in the collections data.<br><br>
+In this step of the pilot, we delve into the historical trends within the museum’s collections data. Through visualizations and summary statistics, we explore the patterns of space utilization/recording and daily acquisitions over time, offering insights into workload allocation, operational efficiency, and long-term planning.
+<br>**Space-Use**: Examines the total space-use (`cubic_ft`) per `department`, `credit`, and `storage_group` (materials-based groupings).
+<br> Answers: **Which departments receive the most works? How are they stored?**
+<br><br>
+<br>**Acquisition Totals**: Analyzes the average acquisition volume across multiple time division.
+<br> Answers: **When are the most acquisitions processed? When is there "down-time"? How long is it?**
+<br><br>
+<br>**Collections Growth**: Describes the collection's growth over time in terms of space and quantity.
+<br>Answers: **How has collections growth been affected by previous museum initiatives or external events?**
+
 
 ### Time Series Forecasting
-Applying statistical and ML modeling to estimate future collections.<br> Reveals how ML can assist museum professionals in decision-making.<br>
 **Link to file:** <a href="./examples/NYC_MoMA_Example/Collections Null Analysis.ipynb">Collections Null Analysis.ipynb</a>
+<br>
+Applying statistical and ML modeling to estimate future collections.
+<br><br>
+In this step of the pilot, we apply statistical and machine learning techniques to estimate future acquisition patterns. Given the nature of the NYC MoMA dataset — where only acquisitions are recorded and no de-accessions are included — we used an **intermittent demand** approach to model acquisition patterns. This method accounts allows us to provide tailored solutions for more accurate future planning. The CADA team’s collective expertise enables us to offer custom solutions that help museum professionals make informed decisions.
+<br>
+**Intermittent Demand**: Analyzes patterns in data representing acquisitions only, used for forecasting future acquisition volumes.<br>
+Answers: **How does data quality inform which methods are applicable?**
+<br>
+**Time Series Analysis**: Applies statistical techniques to describe trends, seasonal patterns, and outliers in the data.
+Answers: **How do rates of acquisition change over time?**
+
 ____
 ## Data Analysis Tools
 Python - A general purpose programming language, very popular in the programming community for its readability and ease-of-use.
