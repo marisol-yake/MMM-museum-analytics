@@ -24,18 +24,18 @@ ____
 ## 3 Stages of Analysis
 ### Null Analysis
 "Checking out the packaging" on the NYC MoMA artwork collections dataset.
-<br>
+<br><br>
 **Link to file:** <a href="./examples/NYC_MoMA_Example/Collections Null Analysis.ipynb">Collections Null Analysis.ipynb</a>
 <br>
 This step is crucial for identifying bottlenecks in data work early on and informing the conditions for the remaining analyses. By addressing data work processes early on in analysis, the CADA seeks to ensure that data processes actually belong to an organization and can be continued independently.
 <br><br>Answers: **Do the patterns of missing records (data) reveal any challenges to organizational data entry processes?**
 
-
+----
 ### Exploratory Analysis
 An extensive exploration of trends in found in the collections data.
 <br>
 **Link to file:** <a href="./examples/NYC_MoMA_Example/Collections Null Analysis.ipynb">Collections Exploratory Data Analysis (EDA).ipynb</a>
-<br>
+<br><br>
 In this step of the pilot, we delve into the historical trends within the museum’s collections data. Through visualizations and summary statistics, we explore the patterns of space utilization/recording and daily acquisitions over time, offering insights into workload allocation, operational efficiency, and long-term planning.
 <br><br>**Space-Use**: Examines the total space-use (`cubic_ft`) per `department`, `credit`, and `storage_group` (materials-based groupings).
 <br> Answers: **Which departments receive the most works? How are they stored?**
@@ -46,7 +46,7 @@ In this step of the pilot, we delve into the historical trends within the museum
 <br>**Collections Growth**: Describes the collection's growth over time in terms of space and quantity.
 <br>Answers: **How has collections growth been affected by previous museum initiatives or external events?**
 
-
+----
 ### Time Series Forecasting
 Applying statistical and ML modeling to estimate future collections.
 <br>
