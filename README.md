@@ -29,6 +29,8 @@ ____
 <br><br>
 This step is crucial for identifying bottlenecks in data work early on and informing the conditions for the remaining analyses. By addressing data work processes early on in analysis, the CADA seeks to ensure that data processes actually belong to an organization and can be continued independently.
 <br><br>**Answers**: *Do the patterns of missing records (data) reveal any challenges to organizational data entry processes?*
+<br>
+**Answers**: *What types of analyses can be used for the current dataset?*
 
 ----
 ### Exploratory Analysis
