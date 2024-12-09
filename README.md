@@ -12,17 +12,27 @@ Transparency is a core value of our project, as a show of good faith to our pilo
 
 Our team strongly values a bottom up approach, in analysis and in project outcomes, our data work begins where our clients express their needs. As consultants, we understand our position to be of witnessing our clients, and reflecting their strengths back onto the organizational practices in play. We want to ensure that all of our clients have complete ownership over their processes and the results of analysis. We are prepared to meet any data work practice as it is, not gatekeep with our own idea of how data work ought to be.
 
+## Goals
+- Forecast future collections and analyze space-use to help museums to reduce the operational costs.
+- Describe storage and information processes to help identify pain points.
+- Motivate cooperative information practices, making work easier for everyone involved.
+- Establish resources that empower interested museum professionals to do similar projects.
+
 ## In Practice
-In the interest of motivating how data work could be relevant to museum professionals, our CADA team has prepared a protoype that includes extensive documentation which describe **how** and **why** we arrived at our decisions. All code is written to be as human-readable as possible, however reading the code is not necessary for understanding the project nor our team's practice. Ideally, we want to reveal our process and code so that museum professionals can understand our team's values as well as have code to take for future reference in their own data-driven endeavours.
+In the interest of motivating how data work could be relevant to museum professionals, our CADA team has prepared a protoype that includes extensive documentation which describe **how** and **why** we arrived at our decisions.
+
+All code is written to be as human-readable as possible, however reading the code is not necessary for understanding the project nor our team's practice. Ideally, we want to reveal our process and code so that museum professionals can understand our team's values as well as have code to take for future reference in their own data-driven endeavours.
 
 ## Contact us
-If you have any questions about the analysis, the accompanying code, or just wanna chat about this project, check out our website: **museum-mgmt.com/cada**, or email me at: **marisol.yake(at)outlook.com**
+If you have any questions about the analysis, the accompanying code, or would just like chat about this project, please check out our website: **museum-mgmt.com/cada**, or email me at: **marisol.yake(at)outlook.com**
 
 <!-- **Project (expected) durations:**
 **Project (expected) costs:** -->
 ____
+<br>
+
 ## 3 Stages of Analysis
-### Null Analysis
+### 1. Null Analysis
 "Checking out the packaging" on the NYC MoMA artwork collections dataset.
 <br>
 **Link to file:** <a href="./examples/NYC_MoMA_Example/Collections Null Analysis.ipynb">Collections Null Analysis.ipynb</a>
@@ -32,8 +42,10 @@ This step is crucial for identifying bottlenecks in data work early on and infor
 <br>
 **Answers**: *What types of analyses can be used for the current dataset?*
 
+<br>
+
 ----
-### Exploratory Analysis
+### 2. Exploratory Analysis
 An extensive exploration of trends in found in the collections data.
 <br>
 **Link to file:** <a href="./examples/NYC_MoMA_Example/Collections Null Analysis.ipynb">Collections Exploratory Data Analysis (EDA).ipynb</a>
@@ -48,8 +60,10 @@ In this step of the pilot, we delve into the historical trends within the museum
 <br>**Collections Growth**: Describes the collection's growth over time in terms of space and quantity.
 <br>**Answers**: *How has collections growth been affected by previous museum initiatives or external events?*
 
+<br>
+
 ----
-### Time Series Forecasting
+### 3. Time Series Forecasting
 Applying statistical and ML modeling to estimate future collections.
 <br>
 **Link to file:** <a href="./examples/NYC_MoMA_Example/Collections Null Analysis.ipynb">Collections Null Analysis.ipynb</a>
@@ -63,7 +77,10 @@ In this step of the pilot, we apply statistical and machine learning techniques 
 **Time Series Analysis**: Applies statistical techniques to describe trends, seasonal patterns, and outliers in the data.
 <br>**Answers**: *How do rates of acquisition change over time?*
 
+<br>
+
 ____
+
 ## Data Analysis Tools
 Python - A general purpose programming language, very popular in the programming community for its readability and ease-of-use.
 
