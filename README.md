@@ -66,7 +66,7 @@ In this step of the pilot, we delve into the historical trends within the museum
 ### 3. Time Series Forecasting
 Applying statistical and ML modeling to estimate future collections.
 <br>
-**Link to file:** <a href="./examples/NYC_MoMA_Example/Collections Null Analysis.ipynb">Collections Null Analysis.ipynb</a>
+**Link to file:** <a href="./examples/NYC_MoMA_Example/Collections Time Series Forecasting.ipynb">Collections Time Series Forecasting.ipynb</a>
 <br><br>
 In this step of the pilot, we apply statistical and machine learning techniques to estimate future acquisition patterns. Given the nature of the NYC MoMA dataset — where only acquisitions are recorded and no de-accessions are included — we used an **intermittent demand** approach to model acquisition patterns. This method accounts allows us to provide tailored solutions for more accurate future planning. The CADA team’s collective expertise enables us to offer custom solutions that help museum professionals make informed decisions.
 <br><br>
