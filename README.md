@@ -48,7 +48,7 @@ This step is crucial for identifying bottlenecks in data work early on and infor
 ### 2. Exploratory Analysis
 An extensive exploration of trends in found in the collections data.
 <br>
-**Link to file:** <a href="./examples/NYC_MoMA_Example/Collections Null Analysis.ipynb">Collections Exploratory Data Analysis (EDA).ipynb</a>
+**Link to file:** <a href="./examples/NYC_MoMA_Example/Collections Exploratory Data Analysis (EDA).ipynb">Collections Exploratory Data Analysis (EDA).ipynb</a>
 <br><br>
 In this step of the pilot, we delve into the historical trends within the museum’s collections data. Through visualizations and summary statistics, we explore the patterns of space utilization/recording and daily acquisitions over time, offering insights into workload allocation, operational efficiency, and long-term planning.
 <br><br>**Space-Use**: Examines the total space-use (in `cubic_ft`) per `department`, `credit`, and `storage_group` (materials-based groupings).
