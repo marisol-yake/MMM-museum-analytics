@@ -1,10 +1,10 @@
 # CADA – An MMM Museum Analytics Pilot
-<img alt="Promotional Banner Image, Collections & Data Analysis (cada)" src="./examples/NYC_MoMA_Example/CADA-banner.png">
+<img alt="Promotional Banner Image, Collections & Data Analysis (cada)" src="./CADA-banner.png">
 
 Welcome to CADA, a Mountain Museum Management (MMM) Analytics Pilot Project!
 
 ## Introducing CADA
-<img alt="CADA Data Work Promotional Image, Stylized definition of 'cada'" src="./examples/NYC_MoMA_Example/media.png" width="60%">
+<img alt="CADA Data Work Promotional Image, Stylized definition of 'cada'" src="./media.png" width="60%">
 
 We are proud to present our very own museum analytics pilot. Our project is focused on illuminating potential benefits for museum collections professionals interested aligning their data work with their operational procedures and organizational values. Ranging from improving worker-experience of data entry, enhancing dataset integrity, visualizing collection diversity, to augmenting day-to-day operations and collections storage procedures. We want to automate our analysis processes specifically to make more time for collaborating alongside our clients and their teams.
 
@@ -35,7 +35,7 @@ ____
 ### 1. Null Analysis
 "Checking out the packaging" on the NYC MoMA artwork collections dataset.
 <br>
-**Link to file:** <a href="./examples/NYC_MoMA_Example/Collections Null Analysis.ipynb">Collections Null Analysis.ipynb</a>
+**Link to file:** <a href="./Collections Null Analysis.ipynb">Collections Null Analysis.ipynb</a>
 <br><br>
 This step is crucial for identifying bottlenecks in data work early on and informing the conditions for the remaining analyses. By addressing data work processes early on in analysis, the CADA team seeks to ensure that data processes actually belong to an organization and can be continued independently.
 <br><br>
@@ -51,7 +51,7 @@ s**Answers**: *Do the patterns of missing records (data) reveal any challenges t
 ### 2. Exploratory Analysis
 An extensive exploration of trends in found in the collections data.
 <br>
-**Link to file:** <a href="./examples/NYC_MoMA_Example/Collections Exploratory Data Analysis (EDA).ipynb">Collections Exploratory Data Analysis (EDA).ipynb</a>
+**Link to file:** <a href="./Collections Exploratory Data Analysis (EDA).ipynb">Collections Exploratory Data Analysis (EDA).ipynb</a>
 <br><br>
 In this step of the pilot, we delve into the historical trends within the museum’s collections data. Through visualizations and summary statistics, we explore the patterns of space utilization/recording and daily acquisitions over time, offering insights into workload allocation, operational efficiency, and long-term planning.
 <br><br>**Space-Use**: Examines the total space-use (in `cubic_ft`) per `department`, `credit`, and `storage_group` (materials-based groupings).
@@ -69,7 +69,7 @@ In this step of the pilot, we delve into the historical trends within the museum
 ### 3. Time Series Forecasting
 Applying statistical and ML modeling to estimate future collections.
 <br>
-**Link to file:** <a href="./examples/NYC_MoMA_Example/Collections Time Series Forecasting.ipynb">Collections Time Series Forecasting.ipynb</a>
+**Link to file:** <a href="./Collections Time Series Forecasting.ipynb">Collections Time Series Forecasting.ipynb</a>
 <br><br>
 In this step of the pilot, we apply statistical and machine learning techniques to estimate future acquisition patterns. Given the nature of the NYC MoMA dataset — where only acquisitions are recorded and no de-accessions are included — we used an **intermittent demand** approach to model acquisition patterns. This method accounts allows us to provide tailored solutions for more accurate future planning. The CADA team’s collective expertise enables us to offer custom solutions that help museum professionals make informed decisions.
 <br><br>
